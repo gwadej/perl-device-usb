@@ -1,0 +1,15 @@
+#!/usr/bin/perl -T
+
+use warnings;
+use strict;
+
+use Test::More;
+use Test::Spelling;
+
+set_spell_cmd('/usr/bin/aspell list');
+add_stopwords(<DATA>);
+all_pod_files_spelling_ok( 'lib' );
+
+__DATA__
+USB
+

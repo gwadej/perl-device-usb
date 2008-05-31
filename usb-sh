@@ -1,0 +1,174 @@
+#!/usr/bin/perl
+
+use Data::Dumper;
+use Device::USB;
+use strict;
+use warnings;
+
+my %cmds = (
+    quit => [ sub { exit 0;}, "quit the program" ],
+    cd  =>  [ \&do_cd, "move through the data structures" ],
+    ls  =>  [ \&do_ls, "display the data in the current or supplied structure" ],
+    pwd =>  [ \&do_pwd, "display the current path through the data structures" ],
+    help => [ \&do_help, "display this screen" ],
+);
+
+my $usb = Device::USB->new();
+
+my @dirs = ( {bus =>[ $usb->list_busses() ]} );
+my @cwd = ();
+
+print "Welcome to the USB shell.\n> ";
+while(<>)
+{
+    next if /^\s+$/;
+
+    chomp;
+    s/^\s+//;
+
+    if(/^(\w+)\s*(.*)/ and exists $cmds{$1})
+    {
+        $cmds{$1}->[0]->( $2 );
+    }
+    else
+    {
+        warn "Unrecognized command '$_'.\n";
+    }
+    print "> ";
+}
+
+
+sub do_help
+{
+    print "The available commands are:\n\n";
+
+    foreach my $cmd (sort keys %cmds)
+    {
+        print "$cmd\t$cmds{$cmd}->[1]\n";
+    }
+
+    print "\n";
+}
+
+
+sub do_cd
+{
+    my $path = shift;
+
+    if('/' eq substr( $path, 0, 1 ))
+    {
+        @dirs = ($dirs[-1]);
+	@cwd = ();
+	return if '/' eq $path;
+    }
+
+    DIR:
+    foreach my $dir (split( '/', $path ))
+    {
+        next if '.' eq $dir or '' eq $dir;
+
+	if('..' eq $dir)
+	{
+	    shift @dirs if @dirs > 1;
+	    pop @cwd;
+	}
+	elsif(my $subdir = find_subdir( $dir ))
+	{
+	    unshift @dirs, $subdir; 
+	    push @cwd, $dir;
+	}
+	else
+	{
+	    warn "'$dir' is not a directory.\n";
+	    last DIR;
+	}
+    }
+}
+
+
+sub do_ls
+{
+    my $path = shift;
+    
+    if(!defined $path or '' eq $path or '.' eq $path)
+    {
+        print_struct( $dirs[0] );
+    }
+    elsif(my $subdir = find_subdir( $path ))
+    {
+        print_struct( $subdir, $path );
+    }
+    else
+    {
+    	   warn "'$path' not recognized at this point.\n";
+    }
+}
+
+
+sub do_pwd
+{
+    print '/', join( '/', @cwd ), "\n";
+}
+
+
+sub print_struct
+{
+    my $ref = shift;
+    
+    my $type = ref $ref;
+    print "$type:\n" if $ref;
+
+    if('ARRAY' eq $type)
+    {
+        print "$_/\n" foreach (0..$#{$ref});
+    }
+    elsif($type)
+    {
+        while(my ($key, $value) = each %{$ref})
+        {
+            if('ARRAY' eq ref $value)
+            {
+	        print "$key-$_/\n" foreach 0..$#{$value};
+            }
+            elsif(ref $value)
+            {
+	        print "$key/\n";
+            }
+            else
+            {
+	        print "$key:\t$value\n";
+            }
+        }
+    }
+    else
+    {
+        print "Need printing support for a $type\n";
+    }
+}
+
+
+sub find_subdir
+{
+    my $dir = shift;
+    my $type = ref $dirs[0];
+
+    if(!$type)
+    {
+        return;
+    }
+    elsif('ARRAY' eq $type and 0 <= $dir and $dir < @{$dirs[0]})
+    {
+        return $dirs[0]->[$dir];
+    }
+    elsif(my ($key, $num) = ($dir =~ /^([^-]+)-(\d+)$/))
+    {
+	return unless exists $dirs[0]->{$key};
+	return unless 0 <= $num and $num < @{$dirs[0]->{$key}};
+
+        return $dirs[0]->{$key}->[$num];
+    }
+    elsif(exists $dirs[0]->{$dir})
+    {
+        return $dirs[0]->{$dir};
+    }
+}

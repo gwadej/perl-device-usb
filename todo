@@ -1,0 +1,23 @@
+
+Tracking down how we find the libusb libraries.
+  * LD_LIBRARY_PATH
+  * LDFLAGS
+
+Hints file?
+Code to find libusb?
+
+Windows tests $^O - 
+  dirname - bus-\d+
+  filename - '\\\\.\\libusb\d+-0001--0x413c-0xa005'
+
+windows
+Strawberry Perl
+Libusb-win32
+  - libusb0.dll -> path
+  - include file under mingw directories
+  - Used the gcc file from the .a directories
+  - Download Filter driver
+
+  g libusb mingw
+
+Check Vanilla Perl Problem Modules page at the Wiki for Vanila Perl.
