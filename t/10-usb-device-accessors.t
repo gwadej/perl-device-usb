@@ -32,7 +32,7 @@ foreach my $bus (@{$busses})
     {
         isa_ok( $dev, "Device::USB::Device" );
         my $filename = $dev->filename();
-        like( $filename, qr/^\d+$/, "Filename is a digit string" );
+        like( $filename, qr/^(?:\d+|[0-9a-f-]+)$/, "Filename is a valid format" );
         my $configs = $dev->configurations();
         isa_ok( $configs, 'ARRAY' );
         like( $dev->bcdUSB(), qr/^\d+\.\d\d$/, "$filename: USB Version" );
