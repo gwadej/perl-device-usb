@@ -30,6 +30,9 @@ SKIP:
     ok( 0 < $device_count, "At least one device found" );
     my $matches = grep { $_->idVendor() == $vendor && $_->idProduct() == $product }
          @devices;
+    diag( "Request: Vendor id: $vendor, Product: $product" );
+    diag( "Vendor id: @{[$_->idVendor()]}, Product: @{[$_->idProduct()]}" )
+        foreach @devices;
     is( $matches, $device_count, "All match the criteria" );
     
     my @vendor_devices = $usb->list_devices( $vendor );
