@@ -1,5 +1,8 @@
 Revision history for Device-USB
 
+0.22    Not yet released
+        Perform cleanup of tests for Mac OSX, as well as changes to clean
+        code for newer Perl::Critic policies.
 0.21    2007/04/16
         Thanks to Vadim Mikhailov for spotting a problem with use of the macro
         Inline_Stack_Vars that prevented compilation under Windows. Applied

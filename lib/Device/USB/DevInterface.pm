@@ -16,11 +16,11 @@ Device::USB::DevInterface - Access a device interface returned by libusb.
 
 =head1 VERSION
 
-Version 0.10
+Version 0.11
 
 =cut
 
-our $VERSION=0.10;
+our $VERSION=0.11;
 
 =head1 SYNOPSIS
 
@@ -63,12 +63,13 @@ sub _make_descr_accessor
     my $name = shift;
     ## no critic (ProhibitStringyEval)
 
-    return eval qq{sub $name
+    return eval <<"EOE";
+sub $name
         {
             my \$self = shift;
             return \$self->{$name};
         }
-    };
+EOE
 }
 
 =over 4

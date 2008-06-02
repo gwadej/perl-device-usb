@@ -16,11 +16,11 @@ Device::USB::DevConfig - Access the device configuration returned by libusb.
 
 =head1 VERSION
 
-Version 0.11
+Version 0.12
 
 =cut
 
-our $VERSION=0.11;
+our $VERSION=0.12;
 
 =head1 SYNOPSIS
 
@@ -61,12 +61,13 @@ sub _make_descr_accessor
     my $name = shift;
     ## no critic (ProhibitStringyEval)
 
-    return eval qq{sub $name
+    return eval <<"EOE";
+sub $name
         {
             my \$self = shift;
             return \$self->{$name};
         }
-    };
+EOE
 }
 
 =over 4
