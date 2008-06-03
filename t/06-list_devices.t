@@ -30,17 +30,14 @@ SKIP:
     ok( 0 < $device_count, "At least one device found" );
     my $matches = grep { $_->idVendor() == $vendor && $_->idProduct() == $product }
          @devices;
-    diag( "Request: Vendor id: $vendor, Product: $product" );
-    diag( "Vendor id: @{[$_->idVendor()]}, Product: @{[$_->idProduct()]}" )
-        foreach @devices;
-    is( $matches, $device_count, "All match the criteria" );
+    is( $matches, $device_count, "All match vendor and product" );
     
     my @vendor_devices = $usb->list_devices( $vendor );
     my $vdevice_count = @vendor_devices;
 
-    ok( $device_count <= $vdevice_count, "At least one device found" );
-    $matches = grep { $_->idVendor() == $vendor } @devices;
-    is( $matches, $vdevice_count, "All match the criteria" );
+    ok( $device_count <= $vdevice_count, "At least one device found by vendor" );
+    $matches = grep { $_->idVendor() == $vendor } @vendor_devices;
+    is( $matches, $vdevice_count, "All vendors match" );
 
     my @all_devices = $usb->list_devices();
     my $all_count = @all_devices;
