@@ -41,7 +41,7 @@ SKIP:
     ok( 0 < $device_count, "At least one device found" );
     my $matches = grep { $_->idVendor() == $vendor && $_->idProduct() == $product }
          @devices;
-    is( $matches, $device_count, "All match the criteria" );
+    is( $matches, $device_count, "All match vendor and product" );
 
     my @vendor_devices = $found_bus->list_devices_if(
         sub { $_->idVendor() == $vendor }
@@ -49,8 +49,8 @@ SKIP:
     my $vdevice_count = @vendor_devices;
 
     ok( $device_count <= $vdevice_count, "At least one device found" );
-    $matches = grep { $_->idVendor() == $vendor } @devices;
-    is( $matches, $vdevice_count, "All match the criteria" );
+    $matches = grep { $_->idVendor() == $vendor } @vendor_devices;
+    is( $matches, $vdevice_count, "All match vendor" );
 
     my @all_devices = $found_bus->list_devices_if( sub { defined } );
     my $all_count = @all_devices;
