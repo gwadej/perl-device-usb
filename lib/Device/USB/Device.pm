@@ -22,7 +22,7 @@ Version 0.18
 
 =cut
 
-our $VERSION=0.18;
+our $VERSION=0.19;
 
 
 =head1 SYNOPSIS
@@ -289,6 +289,11 @@ the integer specified in the descriptor field bConfigurationValue.
 =back
 
 returns 0 on success or <0 on error
+
+When using libusb-win32 under Windows, it is important to call
+C<set_configuration()> after the C<open()> but before any other method calls.
+Without this call, other methods may not work. This call is not required under
+Linux.
 
 =cut
 
@@ -665,6 +670,13 @@ Maximum time to wait (in milliseconds)
 
 The function returns the number of bytes returned or <0 on error.
 
+USB is packet based, not stream based. So using C<bulk_read()> to read part
+of the packet acts like a I<peek>. The next time you read, all of the packet
+is still there.
+
+The data is only removed when you read the entire packet. For this reason, you
+should always call C<bulk_read()> with the total packet size.
+
 =cut
 
 sub bulk_read
@@ -759,10 +771,6 @@ The number of the endpoint to write
 
 Buffer from which to write the requested data.
 
-=item size
-
-Number of bytes of data to write.
-
 =item timeout
 
 Maximum time to wait (in milliseconds)
@@ -800,10 +808,6 @@ The number of the endpoint to write
 =item bytes
 
 Buffer from which to write the requested data.
-
-=item size
-
-Number of bytes of data to write.
 
 =item timeout
 

@@ -1,8 +1,14 @@
 Revision history for Device-USB
 
-0.22    Not yet released
+0.22   2008/10/02
         Perform cleanup of tests for Mac OSX, as well as changes to clean
         code for newer Perl::Critic policies.
+        Correction to documentation of Device::USB::Device methods bulk_write
+        and interrupt_write (reported by John R. Hogeruis).
+        Modified the Inline attributes to make building under systems other
+        than Linux a bit easier. (thanks to John R. Hogeruis for the insight).
+        Make creation of makefile fail if Windows and environment not properly
+        set up.
 0.21    2007/04/16
         Thanks to Vadim Mikhailov for spotting a problem with use of the macro
         Inline_Stack_Vars that prevented compilation under Windows. Applied

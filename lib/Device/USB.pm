@@ -7,7 +7,12 @@ use Carp;
 
 use Inline (
         C => "DATA",
-        LIBS => '-lusb',
+        ($ENV{LIBUSB_LIBDIR}
+            ? ( LIBS => "-L$ENV{LIBUSB_LIBDIR} " .
+                        ($^O eq 'MSWin32' ? '-llibusb' : '-lusb') )
+            : ( LIBS => '-lusb', )
+        ),
+        ($ENV{LIBUSB_INCDIR} ? ( INC => "-I$ENV{LIBUSB_INCDIR}" ) : () ),
         NAME => 'Device::USB',
         VERSION => '0.22',
    );
