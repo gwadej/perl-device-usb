@@ -18,11 +18,11 @@ Device::USB::Device - Use libusb to access USB devices.
 
 =head1 VERSION
 
-Version 0.18
+Version 0.20
 
 =cut
 
-our $VERSION=0.19;
+our $VERSION=0.20;
 
 
 =head1 SYNOPSIS
@@ -682,10 +682,8 @@ should always call C<bulk_read()> with the total packet size.
 sub bulk_read
 {
     my $self = shift;
-    my $ep = shift;
-    my $bytes = shift;
-    my $size = shift;
-    my $timeout = shift;
+    # Don't change to shifts, I need to write back to $bytes.
+    my ($ep, $bytes, $size, $timeout) = @_;
 
     $self->_assert_open();
 
@@ -735,10 +733,8 @@ The function returns the number of bytes returned or <0 on error.
 sub interrupt_read
 {
     my $self = shift;
-    my $ep = shift;
-    my $bytes = shift;
-    my $size = shift;
-    my $timeout = shift;
+    # Don't change to shifts, I need to write back to $bytes.
+    my ($ep, $bytes, $size, $timeout) = @_;
 
     $self->_assert_open();
 

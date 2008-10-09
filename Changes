@@ -1,5 +1,9 @@
 Revision history for Device-USB
 
+0.24   2008/10/09
+        Undo a modification to the parameter handling on bulk_read and
+        interrupt read. The change broke the methods completely. Thanks to
+        Tony Shadwick for pointing it out.
 0.23   2008/10/04
         More documentation cleanup, including correcting the spelling of
         John Hogerhuis's name.
