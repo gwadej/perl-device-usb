@@ -17,7 +17,14 @@ if(defined $usb)
             $interface_count += scalar( map {@{$_}} $config->interfaces() );
         }
     }
-    plan tests => 2 + TESTS_PER_INTERFACE * $interface_count;
+    if($interface_count)
+    {
+        plan tests => 2 + TESTS_PER_INTERFACE * $interface_count;
+    }
+    else
+    {
+        plan skip_all => 'No devices found.';
+    }
 }
 else
 {

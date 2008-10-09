@@ -18,7 +18,14 @@ if(defined $usb)
             $endpoint_count += $_->bNumEndpoints() foreach @interfaces;
         }
     }
-    plan tests => 2 + TESTS_PER_ENDPOINT * $endpoint_count;
+    if($endpoint_count)
+    {
+        plan tests => 2 + TESTS_PER_ENDPOINT * $endpoint_count;
+    }
+    else
+    {
+        plan skip_all => 'No devices found.';
+    }
 }
 else
 {

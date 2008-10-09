@@ -1,12 +1,17 @@
 Revision history for Device-USB
 
+0.23   2008/10/04
+        More documentation cleanup, including correcting the spelling of
+        John Hogerhuis's name.
+        Correcting tests 15, 16, and 17 to skip if no devices are found
+        instead of failing.
 0.22   2008/10/02
         Perform cleanup of tests for Mac OSX, as well as changes to clean
         code for newer Perl::Critic policies.
         Correction to documentation of Device::USB::Device methods bulk_write
-        and interrupt_write (reported by John R. Hogeruis).
+        and interrupt_write (reported by John R. Hogerhuis).
         Modified the Inline attributes to make building under systems other
-        than Linux a bit easier. (thanks to John R. Hogeruis for the insight).
+        than Linux a bit easier. (thanks to John R. Hogheruis for the insight).
         Make creation of makefile fail if Windows and environment not properly
         set up.
 0.21    2007/04/16

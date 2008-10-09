@@ -14,20 +14,28 @@ if(defined $usb)
     {
         $config_count += $dev->bNumConfigurations();
     }
-    plan tests => 2 + TESTS_PER_CONFIGURATION * $config_count;
+    if($config_count)
+    {
+        plan tests => 2 + TESTS_PER_CONFIGURATION * $config_count;
+    }
+    else
+    {
+        plan skip_all => 'No devices found.';
+    }
 }
 else
 {
     fail( "Unable to create USB object." );
 }
 
-my @devices = $usb->list_devices();
-isnt( scalar @devices, 0, "USB devices found" );
-
 can_ok( "Device::USB::DevConfig",
         qw/wTotalLength bNumInterfaces interfaces bConfigurationValue
            iConfiguration bmAttributes MaxPower/
 );
+
+my @devices = $usb->list_devices();
+
+isnt( scalar @devices, 0, "USB devices found" );
 
 foreach my $dev (@devices)
 {

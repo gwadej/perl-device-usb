@@ -14,7 +14,7 @@ use Inline (
         ),
         ($ENV{LIBUSB_INCDIR} ? ( INC => "-I$ENV{LIBUSB_INCDIR}" ) : () ),
         NAME => 'Device::USB',
-        VERSION => '0.22',
+        VERSION => '0.23',
    );
 
 Inline->init();
@@ -45,11 +45,11 @@ Device::USB - Use libusb to access USB devices.
 
 =head1 VERSION
 
-Version 0.22
+Version 0.23
 
 =cut
 
-our $VERSION='0.22';
+our $VERSION='0.23';
 
 
 =head1 SYNOPSIS
@@ -496,11 +496,13 @@ and helped with the development.
 Thanks to Josep Monés Teixidor for fixing the C<bInterfaceClass> bug.
 Thanks to Mike McCauley for support of C<usb_get_driver_np> and
 C<usb_detach_kernel_driver_np>. Thanks to Vadim Mikhailov for fixing
-a compile problem with VC6 on Windows.
+a compile problem with VC6 on Windows. Thanks to John R. Hogheruis for
+information about modifying the Inline parameters for compiling with
+Strawberry Perl on Windows.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2006-2007 Houston Perl Mongers
+Copyright 2006-2008 Houston Perl Mongers
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
