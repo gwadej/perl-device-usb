@@ -2,7 +2,7 @@
 
 use lib "t";
 use TestTools;
-use Test::More tests => 11;
+use Test::More tests => 8;
 use Device::USB;
 use strict;
 use warnings;
@@ -12,29 +12,22 @@ ok( defined $usb, "Object successfully created" );
 
 my $bus = ($usb->list_busses())[0];
 
-ok( defined $bus, "Object successfully created" );
-can_ok( $bus, "find_device_if" );
-
-ok( !defined $bus->find_device_if(
-            sub { 0xFFFF == $_->idVendor() && 0xFFFF == $_->idProduct() }
-        ),
-    "No device found"
-);
-
-eval { $bus->find_device_if() };
-like( $@, qr/Missing predicate/, "Requires a predicate." );
-
-eval { $bus->find_device_if( 1 ) };
-like( $@, qr/Predicate must be/, "Requires a code reference." );
-
-my $busses = $usb->list_busses();
-ok( defined $busses, "USB busses found" );
-
-my ($found_bus, $found_device) =
-    TestTools::find_an_installed_device_and_bus( 0, @{$busses} );
-
 SKIP:
 {
+    skip "No USB buses found.", 8 unless defined $bus;
+
+    eval { $bus->find_device_if() };
+    like( $@, qr/Missing predicate/, "Requires a predicate." );
+
+    eval { $bus->find_device_if( 1 ) };
+    like( $@, qr/Predicate must be/, "Requires a code reference." );
+
+    my $busses = $usb->list_busses();
+    ok( defined $busses, "USB busses found" );
+
+    my ($found_bus, $found_device) =
+        TestTools::find_an_installed_device_and_bus( 0, @{$busses} );
+
     skip "No USB devices installed", 4 unless defined $found_device;
 
     my $vendor = $found_device->idVendor();

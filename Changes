@@ -1,5 +1,9 @@
 Revision history for Device-USB
 
+0.25   2008/10/10
+        Yet another modification to try to get the tests cleaned up for the
+        CPAN Testers. Modify tests 13 and 14 to skip if no USB busses are
+        found instead of failing.
 0.24   2008/10/09
         Undo a modification to the parameter handling on bulk_read and
         interrupt read. The change broke the methods completely. Thanks to
