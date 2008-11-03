@@ -14,7 +14,7 @@ my $bus = ($usb->list_busses())[0];
 
 SKIP:
 {
-    skip "No USB buses found.", 8 unless defined $bus;
+    skip "No USB buses found.", 7 unless defined $bus;
 
     eval { $bus->find_device_if() };
     like( $@, qr/Missing predicate/, "Requires a predicate." );

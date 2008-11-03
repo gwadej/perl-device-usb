@@ -1,5 +1,7 @@
 Revision history for Device-USB
 
+0.26   2008/11/02
+        Correct skip count on test 13 to fix FreeBSD tests.
 0.25   2008/10/10
         Yet another modification to try to get the tests cleaned up for the
         CPAN Testers. Modify tests 13 and 14 to skip if no USB busses are
