@@ -14,7 +14,7 @@ use Inline (
         ),
         ($ENV{LIBUSB_INCDIR} ? ( INC => "-I$ENV{LIBUSB_INCDIR}" ) : () ),
         NAME => 'Device::USB',
-        VERSION => '0.26',
+        VERSION => '0.27',
    );
 
 Inline->init();
@@ -45,11 +45,11 @@ Device::USB - Use libusb to access USB devices.
 
 =head1 VERSION
 
-Version 0.26
+Version 0.27
 
 =cut
 
-our $VERSION='0.26';
+our $VERSION='0.27';
 
 
 =head1 SYNOPSIS
@@ -475,6 +475,12 @@ C<bug-device-usb@rt.cpan.org>, or through the web interface at
 L<http://rt.cpan.org/NoAuth/ReportBug.html?Device::USB>.
 I will be notified, and then you'll automatically be notified of progress on
 your bug as I make changes.
+
+=head1 FOR MORE INFORMATION
+
+The project is hosted at Google Code L<http://code.google.com/p/perl-device-usb/>.
+More information on the project, including installation help is avaliable on the
+Wiki.
 
 =head1 LIMITATIONS
 
