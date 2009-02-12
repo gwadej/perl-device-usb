@@ -504,7 +504,8 @@ Thanks to Josep Monés Teixidor for fixing the C<bInterfaceClass> bug.
 Thanks to Mike McCauley for support of C<usb_get_driver_np> and
 C<usb_detach_kernel_driver_np>.
 
-Thanks to Vadim Mikhailov for fixing a compile problem with VC6 on Windows.
+Thanks to Vadim Mikhailov for fixing a compile problem with VC6 on Windows
+and then chipping in again for VS 2005 on Windows.
 
 Thanks to John R. Hogheruis for information about modifying the Inline
 parameters for compiling with Strawberry Perl on Windows.
