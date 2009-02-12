@@ -21,7 +21,8 @@ can_ok( "Device::USB::Bus", qw/dirname location devices/ );
 foreach my $bus (@{$busses})
 {
     isa_ok( $bus, "Device::USB::Bus" );
-    like( $bus->dirname(), qr/^\d+$/, "Dirname is a digit string" );
+    my $regex = ($^O !~ /win/i) ? qr/^\d+$/ : qr/^(\w+-)?\d+$/;
+    like( $bus->dirname(), $regex, "Dirname is a valid format" );
     ok( defined $bus->location, "Location returns a value" );
     my @devices = $bus->devices();
     foreach my $dev (@devices)

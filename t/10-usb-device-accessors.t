@@ -32,7 +32,8 @@ foreach my $bus (@{$busses})
     {
         isa_ok( $dev, "Device::USB::Device" );
         my $filename = $dev->filename();
-        like( $filename, qr/^(?:\d+|[0-9a-f-]+)$/, "Filename is a valid format" );
+        my $regex = ($^O !~ /win/i) ? qr/^(?:\d+|[0-9a-f-]+)$/ : qr/^[\\.]*[0-9a-z-]+$/;
+        like( $filename, $regex, "Filename is a valid format" );
         my $configs = $dev->configurations();
         isa_ok( $configs, 'ARRAY' );
         like( $dev->bcdUSB(), qr/^\d+\.\d\d$/, "$filename: USB Version" );
