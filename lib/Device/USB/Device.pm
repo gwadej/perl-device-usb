@@ -18,11 +18,11 @@ Device::USB::Device - Use libusb to access USB devices.
 
 =head1 VERSION
 
-Version 0.20
+Version 0.29
 
 =cut
 
-our $VERSION=0.20;
+our $VERSION=0.29;
 
 
 =head1 SYNOPSIS
@@ -684,6 +684,7 @@ sub bulk_read
     my $self = shift;
     # Don't change to shifts, I need to write back to $bytes.
     my ($ep, $bytes, $size, $timeout) = @_;
+    $bytes = q{} unless defined $bytes;
 
     $self->_assert_open();
 
@@ -735,6 +736,7 @@ sub interrupt_read
     my $self = shift;
     # Don't change to shifts, I need to write back to $bytes.
     my ($ep, $bytes, $size, $timeout) = @_;
+    $bytes = q{} unless defined $bytes;
 
     $self->_assert_open();
 

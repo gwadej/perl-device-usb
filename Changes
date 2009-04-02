@@ -1,5 +1,8 @@
 Revision history for Device-USB
 
+0:29   2009/04/02
+        Corrected handling of reads when passed uninitialized 'bytes'
+        variables. Thanks to William King for finding this one.
 0.28   2009/02/12
         Thanks to Vadim Mikhailov for patches supporting the ActiveState
         5.10 version, including upgrading to VS 2005.
