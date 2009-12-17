@@ -14,7 +14,7 @@ use Inline (
         ),
         ($ENV{LIBUSB_INCDIR} ? ( INC => "-I\"$ENV{LIBUSB_INCDIR}\"" ) : () ),
         NAME => 'Device::USB',
-        VERSION => '0.29',
+        VERSION => '0.30',
    );
 
 Inline->init();
@@ -45,11 +45,11 @@ Device::USB - Use libusb to access USB devices.
 
 =head1 VERSION
 
-Version 0.29
+Version 0.30
 
 =cut
 
-our $VERSION='0.29';
+our $VERSION='0.30';
 
 
 =head1 SYNOPSIS
@@ -212,7 +212,7 @@ Any other values are forced to the nearest endpoint.
 sub debug_mode
 {
     my ($class, $level) = @_;
-    
+
     lib_debug_mode( $level );
     return;
 }
@@ -515,7 +515,7 @@ interrupt_read.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2006-2008 Houston Perl Mongers
+Copyright 2006-2009 Houston Perl Mongers
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
@@ -531,6 +531,11 @@ __C__
 #include <usb.h>
 
 static unsigned debugLevel = 0;
+
+unsigned DeviceUSBDebugLevel()
+{
+    return debugLevel;
+}
 
 void libusb_init()
 {
@@ -564,7 +569,7 @@ int libusb_close(void *dev)
 
 int libusb_set_configuration(void *dev, int configuration)
 {
-    if(debugLevel)
+    if(DeviceUSBDebugLevel())
     {
         printf( "libusb_set_configuration( %d )\n", configuration );
     }
@@ -573,7 +578,7 @@ int libusb_set_configuration(void *dev, int configuration)
 
 int libusb_set_altinterface(void *dev, int alternate)
 {
-    if(debugLevel)
+    if(DeviceUSBDebugLevel())
     {
         printf( "libusb_set_altinterface( %d )\n", alternate );
     }
@@ -582,7 +587,7 @@ int libusb_set_altinterface(void *dev, int alternate)
 
 int libusb_clear_halt(void *dev, unsigned int ep)
 {
-    if(debugLevel)
+    if(DeviceUSBDebugLevel())
     {
         printf( "libusb_clear_halt( %d )\n", ep );
     }
@@ -597,7 +602,7 @@ int libusb_reset(void *dev)
 int libusb_get_driver_np(void *dev, int interface, char *name, unsigned int namelen)
 {
     int ret = 0;
-    if(debugLevel)
+    if(DeviceUSBDebugLevel())
     {
         printf( "libusb_get_driver_np( %d )\n", interface );
     }
@@ -612,7 +617,7 @@ int libusb_get_driver_np(void *dev, int interface, char *name, unsigned int name
 
 int libusb_detach_kernel_driver_np(void *dev, int interface)
 {
-    if(debugLevel)
+    if(DeviceUSBDebugLevel())
     {
         printf( "libusb_detach_kernel_driver_np( %d )\n", interface );
     }
@@ -625,7 +630,7 @@ int libusb_detach_kernel_driver_np(void *dev, int interface)
 
 int libusb_claim_interface(void *dev, int interface)
 {
-    if(debugLevel)
+    if(DeviceUSBDebugLevel())
     {
         printf( "libusb_claim_interface( %d )\n", interface );
     }
@@ -634,7 +639,7 @@ int libusb_claim_interface(void *dev, int interface)
 
 int libusb_release_interface(void *dev, int interface)
 {
-    if(debugLevel)
+    if(DeviceUSBDebugLevel())
     {
         printf( "libusb_release_interface( %d )\n", interface );
     }
@@ -648,7 +653,7 @@ void libusb_control_msg(void *dev, int requesttype, int request, int value, int 
 
     Inline_Stack_Vars;
 
-    if(debugLevel)
+    if(DeviceUSBDebugLevel())
     {
         printf( "libusb_control_msg( %#04x, %#04x, %#04x, %#04x, %p, %d, %d )\n",
             requesttype, request, value, index, bytes, size, timeout
@@ -656,7 +661,7 @@ void libusb_control_msg(void *dev, int requesttype, int request, int value, int 
         /* maybe need to add support for printing the bytes string. */
     }
     retval = usb_control_msg((usb_dev_handle *)dev, requesttype, request, value, index, bytes, size, timeout);
-    if(debugLevel)
+    if(DeviceUSBDebugLevel())
     {
         printf( "\t => %d\n",retval );
     }
@@ -685,7 +690,7 @@ void libusb_control_msg(void *dev, int requesttype, int request, int value, int 
 
 int libusb_get_string(void *dev, int index, int langid, char *buf, size_t buflen)
 {
-    if(debugLevel)
+    if(DeviceUSBDebugLevel())
     {
         printf( "libusb_get_string( %d, %d, %p, %u )\n",
             index, langid, buf, buflen
@@ -696,7 +701,7 @@ int libusb_get_string(void *dev, int index, int langid, char *buf, size_t buflen
 
 int libusb_get_string_simple(void *dev, int index, char *buf, size_t buflen)
 {
-    if(debugLevel)
+    if(DeviceUSBDebugLevel())
     {
         printf( "libusb_get_string_simple( %d, %p, %u )\n",
             index, buf, buflen
@@ -873,7 +878,7 @@ static SV* build_interface( struct usb_interface_descriptor* inter )
     return sv_bless( newRV_noinc( (SV*)hash ),
         gv_stashpv( "Device::USB::DevInterface", 1 )
     );
-} 
+}
 
 /*
  * Given a pointer to an array of usb_interface structs, create a

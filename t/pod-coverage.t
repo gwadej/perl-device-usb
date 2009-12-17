@@ -14,6 +14,7 @@ all_pod_coverage_ok(
             qr/^lib_get_usb_busses$/,
             qr/^lib_list_busses$/,
             qr/^lib_debug_mode$/,
+            qr/^DeviceUSBDebugLevel$/,
         ]
     }
 );
