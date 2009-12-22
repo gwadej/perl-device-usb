@@ -20,7 +20,7 @@ unless(header_found())
 {
     die <<"END";
 ERROR: Can't find usb.h header.
-    
+
 If the library is not installed, you will need to install it. If it is
 installed somewhere other than /usr or /usr/local, you need to set the
 following environment variables:
@@ -34,8 +34,8 @@ END
 unless(lib_found())
 {
     die <<"END";
-ERROR: Can't find libusb.so library.
-    
+ERROR: Can't find libusb library.
+
 If the library is not installed, you will need to install it. If it is
 installed somewhere other than /usr or /usr/local, you need to set the
 following environment variables:
@@ -80,7 +80,7 @@ sub lib_found
 {
     foreach my $dir (qw(/usr/lib /usr/local/lib), $ENV{LIBUSB_LIBDIR})
     {
-        return 1 if defined $dir && ($^O =~ /win/i ? -e "$dir/libusb.lib" : -e "$dir/libusb.so") ;
+        return 1 if defined $dir && ($^O =~ /win/i ? (-e "$dir/libusb.lib" || -e "$dir/libusb.a") : -e "$dir/libusb.so") ;
     }
 
     return;

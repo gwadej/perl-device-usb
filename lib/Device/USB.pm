@@ -14,7 +14,7 @@ use Inline (
         ),
         ($ENV{LIBUSB_INCDIR} ? ( INC => "-I\"$ENV{LIBUSB_INCDIR}\"" ) : () ),
         NAME => 'Device::USB',
-        VERSION => '0.30',
+        VERSION => '0.31',
    );
 
 Inline->init();
@@ -45,11 +45,11 @@ Device::USB - Use libusb to access USB devices.
 
 =head1 VERSION
 
-Version 0.30
+Version 0.31
 
 =cut
 
-our $VERSION='0.30';
+our $VERSION=0.31;
 
 
 =head1 SYNOPSIS
