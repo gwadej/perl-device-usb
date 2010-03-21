@@ -14,7 +14,7 @@ use Inline (
         ),
         ($ENV{LIBUSB_INCDIR} ? ( INC => "-I\"$ENV{LIBUSB_INCDIR}\"" ) : () ),
         NAME => 'Device::USB',
-        VERSION => '0.31',
+        VERSION => '0.32',
    );
 
 Inline->init();
@@ -45,11 +45,11 @@ Device::USB - Use libusb to access USB devices.
 
 =head1 VERSION
 
-Version 0.31
+Version 0.32
 
 =cut
 
-our $VERSION=0.31;
+our $VERSION=0.32;
 
 
 =head1 SYNOPSIS
@@ -557,17 +557,17 @@ void *libusb_get_busses()
     return usb_get_busses();
 }
 
-void *libusb_open(void *dev)
+void *libusb_open(char *dev)
 {
     return usb_open( (struct usb_device*)dev );
 }
 
-int libusb_close(void *dev)
+int libusb_close(char *dev)
 {
     return usb_close((usb_dev_handle *)dev);
 }
 
-int libusb_set_configuration(void *dev, int configuration)
+int libusb_set_configuration(char *dev, int configuration)
 {
     if(DeviceUSBDebugLevel())
     {
@@ -576,7 +576,7 @@ int libusb_set_configuration(void *dev, int configuration)
     return usb_set_configuration((usb_dev_handle *)dev, configuration);
 }
 
-int libusb_set_altinterface(void *dev, int alternate)
+int libusb_set_altinterface(char *dev, int alternate)
 {
     if(DeviceUSBDebugLevel())
     {
@@ -585,7 +585,7 @@ int libusb_set_altinterface(void *dev, int alternate)
     return usb_set_altinterface((usb_dev_handle *)dev, alternate);
 }
 
-int libusb_clear_halt(void *dev, unsigned int ep)
+int libusb_clear_halt(char *dev, unsigned int ep)
 {
     if(DeviceUSBDebugLevel())
     {
@@ -594,12 +594,12 @@ int libusb_clear_halt(void *dev, unsigned int ep)
     return usb_clear_halt((usb_dev_handle *)dev, ep);
 }
 
-int libusb_reset(void *dev)
+int libusb_reset(char *dev)
 {
     return usb_reset((usb_dev_handle *)dev);
 }
 
-int libusb_get_driver_np(void *dev, int interface, char *name, unsigned int namelen)
+int libusb_get_driver_np(char *dev, int interface, char *name, unsigned int namelen)
 {
     int ret = 0;
     if(DeviceUSBDebugLevel())
@@ -615,7 +615,7 @@ int libusb_get_driver_np(void *dev, int interface, char *name, unsigned int name
 #endif
 }
 
-int libusb_detach_kernel_driver_np(void *dev, int interface)
+int libusb_detach_kernel_driver_np(char *dev, int interface)
 {
     if(DeviceUSBDebugLevel())
     {
@@ -628,7 +628,7 @@ int libusb_detach_kernel_driver_np(void *dev, int interface)
 #endif
 }
 
-int libusb_claim_interface(void *dev, int interface)
+int libusb_claim_interface(char *dev, int interface)
 {
     if(DeviceUSBDebugLevel())
     {
@@ -637,7 +637,7 @@ int libusb_claim_interface(void *dev, int interface)
     return usb_claim_interface((usb_dev_handle *)dev, interface);
 }
 
-int libusb_release_interface(void *dev, int interface)
+int libusb_release_interface(char *dev, int interface)
 {
     if(DeviceUSBDebugLevel())
     {
@@ -646,7 +646,7 @@ int libusb_release_interface(void *dev, int interface)
     return usb_release_interface((usb_dev_handle *)dev, interface);
 }
 
-void libusb_control_msg(void *dev, int requesttype, int request, int value, int index, char *bytes, int size, int timeout)
+void libusb_control_msg(char *dev, int requesttype, int request, int value, int index, char *bytes, int size, int timeout)
 {
     int i = 0;
     int retval = 0;
@@ -688,7 +688,7 @@ void libusb_control_msg(void *dev, int requesttype, int request, int value, int 
     Inline_Stack_Done;
 }
 
-int libusb_get_string(void *dev, int index, int langid, char *buf, size_t buflen)
+int libusb_get_string(char *dev, int index, int langid, char *buf, size_t buflen)
 {
     if(DeviceUSBDebugLevel())
     {
@@ -699,7 +699,7 @@ int libusb_get_string(void *dev, int index, int langid, char *buf, size_t buflen
     return usb_get_string((usb_dev_handle *)dev, index, langid, buf, buflen);
 }
 
-int libusb_get_string_simple(void *dev, int index, char *buf, size_t buflen)
+int libusb_get_string_simple(char *dev, int index, char *buf, size_t buflen)
 {
     if(DeviceUSBDebugLevel())
     {
@@ -710,32 +710,32 @@ int libusb_get_string_simple(void *dev, int index, char *buf, size_t buflen)
     return usb_get_string_simple((usb_dev_handle *)dev, index, buf, buflen);
 }
 
-int libusb_get_descriptor(void *dev, unsigned char type, unsigned char index, void *buf, int size)
+int libusb_get_descriptor(char *dev, unsigned char type, unsigned char index, void *buf, int size)
 {
     return usb_get_descriptor((usb_dev_handle *)dev, type, index, buf, size);
 }
 
-int libusb_get_descriptor_by_endpoint(void *dev, int ep, unsigned char type, unsigned char index, void *buf, int size)
+int libusb_get_descriptor_by_endpoint(char *dev, int ep, unsigned char type, unsigned char index, void *buf, int size)
 {
     return usb_get_descriptor_by_endpoint((usb_dev_handle *)dev, ep, type, index, buf, size);
 }
 
-int libusb_bulk_write(void *dev, int ep, char *bytes, int size, int timeout)
+int libusb_bulk_write(char *dev, int ep, char *bytes, int size, int timeout)
 {
     return usb_bulk_write((usb_dev_handle *)dev, ep, bytes, size, timeout);
 }
 
-int libusb_bulk_read(void *dev, int ep, char *bytes, int size, int timeout)
+int libusb_bulk_read(char *dev, int ep, char *bytes, int size, int timeout)
 {
     return usb_bulk_read((usb_dev_handle *)dev, ep, bytes, size, timeout);
 }
 
-int libusb_interrupt_write(void *dev, int ep, char *bytes, int size, int timeout)
+int libusb_interrupt_write(char *dev, int ep, char *bytes, int size, int timeout)
 {
     return usb_interrupt_write((usb_dev_handle *)dev, ep, bytes, size, timeout);
 }
 
-int libusb_interrupt_read(void *dev, int ep, char *bytes, int size, int timeout)
+int libusb_interrupt_read(char *dev, int ep, char *bytes, int size, int timeout)
 {
     return usb_interrupt_read((usb_dev_handle *)dev, ep, bytes, size, timeout);
 }

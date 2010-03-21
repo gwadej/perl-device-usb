@@ -78,7 +78,8 @@ sub header_found
 
 sub lib_found
 {
-    foreach my $dir (qw(/usr/lib /usr/local/lib), $ENV{LIBUSB_LIBDIR})
+    foreach my $dir (qw(/usr/local/lib64 /usr/lib64 /lib64 /usr/lib /usr/local/lib),
+                     $ENV{LIBUSB_LIBDIR})
     {
         return 1 if defined $dir && ($^O =~ /win/i ? (-e "$dir/libusb.lib" || -e "$dir/libusb.a") : -e "$dir/libusb.so") ;
     }
