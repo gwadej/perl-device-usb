@@ -36,13 +36,13 @@ foreach my $bus (@{$busses})
         like( $filename, $regex, "Filename is a valid format" );
         my $configs = $dev->configurations();
         isa_ok( $configs, 'ARRAY' );
-        like( $dev->bcdUSB(), qr/^\d+\.\d\d$/, "$filename: USB Version" );
+        like( $dev->bcdUSB(), qr/^\d+\.\d+$/, "$filename: USB Version" );
         like( $dev->bDeviceClass(), qr/^\d+$/, "$filename: device class" );
         like( $dev->bDeviceSubClass(), qr/^\d+$/, "$filename: device subclass" );
         like( $dev->bMaxPacketSize0(), qr/^\d+$/, "$filename: max packet size" );
         like( $dev->idVendor(), qr/^\d+$/, "$filename: vendor id" );
         like( $dev->idProduct(), qr/^\d+$/, "$filename: product id" );
-        like( $dev->bcdDevice(), qr/^\d+\.\d\d$/, "$filename: Device version" );
+        like( $dev->bcdDevice(), qr/^\d+\.\d+$/, "$filename: Device version" );
         like( $dev->iManufacturer(), qr/^\d+$/, "$filename: manufacturer index" );
         like( $dev->iProduct(), qr/^\d+$/, "$filename: product index" );
         like( $dev->iSerialNumber(), qr/^\d+$/, "$filename: serial number index" );
