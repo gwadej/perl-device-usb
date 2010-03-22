@@ -1,5 +1,7 @@
 Revision history for Device-USB
 
+0.33   2010/03/22
+        Correct a unit test that failed on FreeBSD.
 0.32   2010/03/21
         Corrected a unit test that was too strict, identified by H. Merljn Brand.
         Added 64-bit lib directories to the dependency check. Thanks to
