@@ -14,7 +14,7 @@ use Inline (
         ),
         ($ENV{LIBUSB_INCDIR} ? ( INC => "-I\"$ENV{LIBUSB_INCDIR}\"" ) : () ),
         NAME => 'Device::USB',
-        VERSION => '0.33',
+        VERSION => '0.34',
    );
 
 Inline->init();
@@ -45,11 +45,11 @@ Device::USB - Use libusb to access USB devices.
 
 =head1 VERSION
 
-Version 0.33
+Version 0.34
 
 =cut
 
-our $VERSION=0.33;
+our $VERSION=0.34;
 
 
 =head1 SYNOPSIS
@@ -505,7 +505,8 @@ Thanks to Mike McCauley for support of C<usb_get_driver_np> and
 C<usb_detach_kernel_driver_np>.
 
 Thanks to Vadim Mikhailov for fixing a compile problem with VC6 on Windows
-and then chipping in again for VS 2005 on Windows.
+and then chipping in again for VS 2005 on Windows, and yet again to fix
+warnings on C99-compliant compilers.
 
 Thanks to John R. Hogheruis for information about modifying the Inline
 parameters for compiling with Strawberry Perl on Windows.
@@ -692,8 +693,8 @@ int libusb_get_string(char *dev, int index, int langid, char *buf, size_t buflen
 {
     if(DeviceUSBDebugLevel())
     {
-        printf( "libusb_get_string( %d, %d, %p, %u )\n",
-            index, langid, buf, buflen
+        printf( "libusb_get_string( %d, %d, %p, %lu )\n",
+            index, langid, buf, (unsigned long)buflen
         );
     }
     return usb_get_string((usb_dev_handle *)dev, index, langid, buf, buflen);
@@ -703,8 +704,8 @@ int libusb_get_string_simple(char *dev, int index, char *buf, size_t buflen)
 {
     if(DeviceUSBDebugLevel())
     {
-        printf( "libusb_get_string_simple( %d, %p, %u )\n",
-            index, buf, buflen
+        printf( "libusb_get_string_simple( %d, %p, %lu )\n",
+            index, buf, (unsigned long)buflen
         );
     }
     return usb_get_string_simple((usb_dev_handle *)dev, index, buf, buflen);
@@ -760,7 +761,7 @@ static void hashStoreBcd( HV *hash, const char *key, long value )
 
     sprintf( buffer, "%d.%d%d", major, minor, subminor );
 
-    hv_store( hash, key, strlen( key ), newSVpv( buffer, strlen( buffer ) ), 0 );
+    (void) hv_store( hash, key, strlen( key ), newSVpv( buffer, strlen( buffer ) ), 0 );
 }
 
 /*
@@ -768,7 +769,7 @@ static void hashStoreBcd( HV *hash, const char *key, long value )
  */
 static void hashStoreInt( HV *hash, const char *key, long value )
 {
-    hv_store( hash, key, strlen( key ), newSViv( value ), 0 );
+    (void) hv_store( hash, key, strlen( key ), newSViv( value ), 0 );
 }
 
 /*
@@ -776,7 +777,7 @@ static void hashStoreInt( HV *hash, const char *key, long value )
  */
 static void hashStoreString( HV *hash, const char *key, const char *value )
 {
-    hv_store( hash, key, strlen( key ), newSVpv( value, strlen( value ) ), 0 );
+    (void) hv_store( hash, key, strlen( key ), newSVpv( value, strlen( value ) ), 0 );
 }
 
 /*
@@ -784,7 +785,7 @@ static void hashStoreString( HV *hash, const char *key, const char *value )
  */
 static void hashStoreSV( HV *hash, const char *key, SV *value )
 {
-    hv_store( hash, key, strlen( key ), value, 0 );
+    (void) hv_store( hash, key, strlen( key ), value, 0 );
 }
 
 /*

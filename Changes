@@ -1,5 +1,8 @@
 Revision history for Device-USB
 
+0.34   2010/07/05
+        Apply patch from Vadim Mikhailov that silences warnings on C99-compliant
+        compilers.
 0.33   2010/03/22
         Correct a unit test that failed on FreeBSD.
 0.32   2010/03/21
