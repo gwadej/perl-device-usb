@@ -1,5 +1,10 @@
 Revision history for Device-USB
 
+0.35   2010/07/21
+        Re-examined typecasting patch from release 0.32, thanks to a bug report
+        from Magnus Sulland. Some of the wrong void* parameters were changed to
+        char* and a few were missed that should have been changed. Should
+        prevent segfaults.
 0.34   2010/07/05
         Apply patch from Vadim Mikhailov that silences warnings on C99-compliant
         compilers.
