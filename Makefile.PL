@@ -48,21 +48,30 @@ END
 
 WriteMakefile(
     NAME                => 'Device::USB',
-    AUTHOR              => 'G. Wade Johnson <wade@anomaly.org>',
+    AUTHOR              => 'G. Wade Johnson <gwadej@cpan.org>',
     VERSION_FROM        => 'lib/Device/USB.pm',
     ABSTRACT_FROM       => 'lib/Device/USB.pm',
     PL_FILES            => {},
+    LICENSE             => 'perl',
     PREREQ_PM => {
         'Test::More' => 0,
-	'Inline' => 0,
-	'Inline::C' => 0,
-	'Inline::MakeMaker' => 0,
-	'Carp' => 0,
+        'Inline' => 0,
+        'Inline::C' => 0,
+        'Inline::MakeMaker' => 0,
+        'Carp' => 0,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => {
         FILES => 'Device-USB-* USB.inl _Inline'
     },
+    META_MERGE          => {
+        resources => {
+            repository => {
+                type => 'git',
+                url  => 'https://github.com/gwadej/perl-device-usb.git',
+                web  => 'https://github.com/gwadej/perl-device-usb',
+            },
+        },
 );
 
 
