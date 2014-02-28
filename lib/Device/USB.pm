@@ -478,7 +478,7 @@ your bug as I make changes.
 
 =head1 FOR MORE INFORMATION
 
-The project is hosted at Google Code L<http://code.google.com/p/perl-device-usb/>.
+The project is hosted at github L<https://github.com/gwadej/perl-device-usb/>.
 More information on the project, including installation help is avaliable on the
 Wiki.
 
