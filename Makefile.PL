@@ -51,8 +51,9 @@ WriteMakefile(
     AUTHOR              => 'G. Wade Johnson <gwadej@cpan.org>',
     VERSION_FROM        => 'lib/Device/USB.pm',
     ABSTRACT_FROM       => 'lib/Device/USB.pm',
-    PL_FILES            => {},
     LICENSE             => 'perl',
+    EXE_FILES           => [ 'bin/usb-sh', 'bin/dump_usb.pl' ],
+    PL_FILES            => {},
     PREREQ_PM => {
         'Test::More' => 0,
         'Inline' => 0,
