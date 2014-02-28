@@ -39,6 +39,8 @@ use constant CLASS_HUB =>     9;
 use constant CLASS_DATA =>   10;
 use constant CLASS_VENDOR_SPEC => 0xff;
 
+=encoding utf8
+
 =head1 NAME
 
 Device::USB - Use libusb to access USB devices.
