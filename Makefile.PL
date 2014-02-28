@@ -52,7 +52,7 @@ WriteMakefile(
     VERSION_FROM        => 'lib/Device/USB.pm',
     ABSTRACT_FROM       => 'lib/Device/USB.pm',
     LICENSE             => 'perl',
-    EXE_FILES           => [ 'bin/usb-sh', 'bin/dump_usb.pl' ],
+    EXE_FILES           => [ 'bin/dump_usb.pl' ],
     PL_FILES            => {},
     PREREQ_PM => {
         'Test::More' => 0,

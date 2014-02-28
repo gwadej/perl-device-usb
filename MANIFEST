@@ -1,5 +1,5 @@
 Changes
-dump_usb.pl
+bin/dump_usb.pl
 lib/Device/USB.pm
 lib/Device/USB/Bus.pm
 lib/Device/USB/DevConfig.pm
@@ -35,6 +35,6 @@ t/boilerplate.t
 t/TestTools.pm
 xt/critic.t
 xt/hasversion.t
-xt/pocoverage.t
+xt/podcoverage.t
 xt/pod.t
 USB.pm
