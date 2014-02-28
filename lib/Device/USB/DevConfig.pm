@@ -5,6 +5,8 @@ use warnings;
 use strict;
 use Carp;
 
+=encoding utf8
+
 =head1 Device::USB::DevConfig
 
 This class encapsulates a USB Device Configuration and the methods that

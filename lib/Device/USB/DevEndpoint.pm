@@ -5,6 +5,8 @@ use warnings;
 use strict;
 use Carp;
 
+=encoding utf8
+
 =head1 Device::USB::DevEndpoint
 
 This class encapsulates a USB Device endpoint and the methods that object

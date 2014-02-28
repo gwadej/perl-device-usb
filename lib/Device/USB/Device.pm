@@ -7,6 +7,8 @@ use Carp;
 
 use constant MAX_BUFFER_SIZE => 256;
 
+=encoding utf8
+
 =head1 Device::USB::Device
 
 This class encapsulates the USB device structure and the methods that may be

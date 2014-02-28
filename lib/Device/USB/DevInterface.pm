@@ -5,6 +5,8 @@ use warnings;
 use strict;
 use Carp;
 
+=encoding utf8
+
 =head1 Device::USB::DevInterface
 
 This class encapsulates a USB Device Interface and the methods that object
