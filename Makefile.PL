@@ -72,6 +72,10 @@ WriteMakefile(
                 web  => 'https://github.com/gwadej/perl-device-usb',
             },
         },
+    },
+    test               => {
+        TESTS => 't/*.t xt/*.t',
+    },
 );
 
 
