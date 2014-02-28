@@ -1,0 +1,7 @@
+*.bak
+MYMETA.*
+Makefile
+*.inl
+_Inline
+blib/
+pm_to_blib

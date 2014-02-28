@@ -32,7 +32,9 @@ t/16-usb_dev_interface.t
 t/17-usb_dev_endpoint.t
 t/18-usb_device-configurations.t
 t/boilerplate.t
-t/pod-coverage.t
-t/pod.t
 t/TestTools.pm
+xt/critic.t
+xt/hasversion.t
+xt/pocoverage.t
+xt/pod.t
 USB.pm
