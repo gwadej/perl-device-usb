@@ -18,11 +18,11 @@ Device::USB::DevInterface - Access a device interface returned by libusb.
 
 =head1 VERSION
 
-Version 0.11
+Version 0.36
 
 =cut
 
-our $VERSION=0.11;
+our $VERSION=0.36;
 
 =head1 SYNOPSIS
 
@@ -148,7 +148,7 @@ that is the entire reason for the module's existence.
 
 =head1 AUTHOR
 
-G. Wade Johnson (wade at anomaly dot org)
+G. Wade Johnson (gwadej at cpan dot org)
 Paul Archer (paul at paularcher dot org)
 
 Houston Perl Mongers Group
@@ -169,7 +169,7 @@ and helped with the development.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2006 Houston Perl Mongers
+Copyright 2006-2013 Houston Perl Mongers
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

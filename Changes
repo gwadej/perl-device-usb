@@ -4,6 +4,8 @@ Revision history for Device-USB
    - Convert to xt-based author tests for non-installation tests.
    - Fix failing author tests.
    - Move code to github and cleanup repo.
+0.36 2013-10-24
+   - Correct my author email address.
 0.35 2010-07-21
    - Re-examined typecasting patch from release 0.32, thanks to a bug report
      from Magnus Sulland. Some of the wrong void* parameters were changed to

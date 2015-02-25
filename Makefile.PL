@@ -82,6 +82,8 @@ WriteMakefile(
 
 sub header_found
 {
+    return 1 if $^O eq 'linux';
+
     foreach my $dir (qw(/usr/include /usr/local/include), $ENV{LIBUSB_INCDIR})
     {
         return 1 if defined $dir && -e "$dir/usb.h";
@@ -92,6 +94,8 @@ sub header_found
 
 sub lib_found
 {
+    return 1 if $^O eq 'linux';
+
     foreach my $dir (qw(/usr/local/lib64 /usr/lib64 /lib64 /usr/lib /usr/local/lib),
                      $ENV{LIBUSB_LIBDIR})
     {
