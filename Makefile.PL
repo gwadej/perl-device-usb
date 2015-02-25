@@ -54,20 +54,25 @@ WriteMakefile(
     PL_FILES            => {},
     PREREQ_PM => {
         'Test::More' => 0,
-	'Inline' => 0,
-	'Inline::C' => 0,
-	'Inline::MakeMaker' => 0,
-	'Carp' => 0,
+        'Inline' => 0,
+        'Inline::C' => 0,
+        'Carp' => 0,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => {
         FILES => 'Device-USB-* USB.inl _Inline'
+    },
+    CONFIGURE_REQUIRES => {
+        "ExtUtils::MakeMaker" => 0,
+        'Inline::MakeMaker' => 0,
     },
 );
 
 
 sub header_found
 {
+    return 1 if $^O eq 'linux';
+
     foreach my $dir (qw(/usr/include /usr/local/include), $ENV{LIBUSB_INCDIR})
     {
         return 1 if defined $dir && -e "$dir/usb.h";
@@ -78,6 +83,8 @@ sub header_found
 
 sub lib_found
 {
+    return 1 if $^O eq 'linux';
+
     foreach my $dir (qw(/usr/local/lib64 /usr/lib64 /lib64 /usr/lib /usr/local/lib),
                      $ENV{LIBUSB_LIBDIR})
     {

@@ -131,7 +131,7 @@ L<http://libusb.sourceforge.net/>.
 
 =head1 AUTHOR
 
-G. Wade Johnson (wade at anomaly dot org)
+G. Wade Johnson (gwadej at cpan dot org)
 Paul Archer (paul at paularcher dot org)
 
 Houston Perl Mongers Group
@@ -143,7 +143,7 @@ list. In particular, Anthony L. Awtrey who contributed the first FAQ answer.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2006 Houston Perl Mongers
+Copyright 2006-2013 Houston Perl Mongers
 
 This document is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
