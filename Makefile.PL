@@ -54,11 +54,16 @@ WriteMakefile(
     LICENSE             => 'perl',
     EXE_FILES           => [ 'bin/dump_usb.pl' ],
     PL_FILES            => {},
-    PREREQ_PM => {
+    CONFIGURE_REQUIRES  => {
+        'ExtUtils::MakeMaker' => 0,
+        'Inline::MakeMaker' => 0,
+    },
+    BUILD_REQUIRES => {
         'Test::More' => 0,
+    },
+    PREREQ_PM => {
         'Inline' => 0,
         'Inline::C' => 0,
-        'Inline::MakeMaker' => 0,
         'Carp' => 0,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
