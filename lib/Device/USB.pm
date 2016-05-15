@@ -81,7 +81,7 @@ the method name prepended with "usb_".
 
 This module provides a Perl interface to the C library libusb. This library
 supports a relatively full set of functionality to access a USB device. In
-addition to the libusb, functioality, Device::USB provides a few
+addition to the libusb functionality Device::USB provides a few
 convenience features that are intended to produce a more Perl-ish interface.
 
 These features include:
