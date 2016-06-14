@@ -5,6 +5,7 @@ use warnings;
 use strict;
 use Carp;
 
+no warnings; # Avoid compile time warnings from undeclared $ENV variables
 use Inline (
         C => "DATA",
         ($ENV{LIBUSB_LIBDIR}
@@ -18,6 +19,7 @@ use Inline (
    );
 
 Inline->init();
+use warnings;
 
 #
 # Now the Perl code.
