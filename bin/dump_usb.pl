@@ -13,11 +13,11 @@ dump_usb.pl - Use Device::USB to list USB devices.
 
 =head1 VERSION
 
-Version 0.02
+Version 0.37
 
 =cut
 
-our $VERSION=0.02;
+our $VERSION=0.37;
 
 =head1 SYNOPSIS
 

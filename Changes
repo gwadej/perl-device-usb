@@ -1,6 +1,8 @@
 Revision history for Device-USB
 
-???? ??????????
+0.37 2017-05-14
+   - Deprecate module
+   - Correct usage of Inline::C
    - Convert to xt-based author tests for non-installation tests.
    - Fix failing author tests.
    - Move code to github and cleanup repo.

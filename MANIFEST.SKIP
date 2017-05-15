@@ -12,3 +12,4 @@ bin/usb-sh
 ^synchtest.pl$
 ^Device-USB-.*\.tar\.gz$
 \d+_local_
+.git

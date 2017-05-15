@@ -14,7 +14,7 @@ use Inline (
         ),
         ($ENV{LIBUSB_INCDIR} ? ( INC => "-I\"$ENV{LIBUSB_INCDIR}\"" ) : () ),
         NAME => 'Device::USB',
-        VERSION => '0.36',
+        VERSION => '0.37',
    );
 
 Inline->init();
@@ -43,15 +43,15 @@ use constant CLASS_VENDOR_SPEC => 0xff;
 
 =head1 NAME
 
-Device::USB - Use libusb to access USB devices.
+Device::USB - Use libusb to access USB devices. (DEPRECATED)
 
 =head1 VERSION
 
-Version 0.36
+Version 0.37
 
 =cut
 
-our $VERSION=0.36;
+our $VERSION=0.37;
 
 
 =head1 SYNOPSIS
@@ -78,6 +78,10 @@ functionality is generally the same as the libusb function whose name is
 the method name prepended with "usb_".
 
 =head1 DESCRIPTION
+
+This module is deprecated as of version 0.37. I have not had the time
+or need to update the module, and no one has been willing to take it
+over.
 
 This module provides a Perl interface to the C library libusb. This library
 supports a relatively full set of functionality to access a USB device. In
