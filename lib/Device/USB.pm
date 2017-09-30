@@ -81,7 +81,8 @@ the method name prepended with "usb_".
 
 This module is deprecated as of version 0.37. I have not had the time
 or need to update the module, and no one has been willing to take it
-over.
+over. L<USB::LibUSB> is an actively maintained alternative. It provides
+bindings to libusb-1.0.
 
 This module provides a Perl interface to the C library libusb. This library
 supports a relatively full set of functionality to access a USB device. In
