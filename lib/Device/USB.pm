@@ -4,9 +4,12 @@ require 5.006;
 use warnings;
 use strict;
 use Carp;
+use Config;
 
 use Inline (
         C => "DATA",
+        CCFLAGS => "$Config{ccflags}" . ($ENV{CFLAGS} ? " $ENV{CFLAGS}" : '') . ($ENV{CPPFLAGS} ? " $ENV{CPPFLAGS}" : ''),
+        LDDLFLAGS => "$Config{lddlflags}" . ($ENV{LDFLAGS} ? " $ENV{LDFLAGS}" : ''),
         ($ENV{LIBUSB_LIBDIR}
             ? ( LIBS => "-L\"$ENV{LIBUSB_LIBDIR}\" " .
                         ($^O eq 'MSWin32' ? ' -llibusb -L\"$ENV{WINDDK}\\lib\\crt\\i386\" -lmsvcrt ' : '-lusb') )

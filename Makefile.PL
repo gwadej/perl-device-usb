@@ -1,6 +1,7 @@
 use strict;
 use warnings;
 use Inline::MakeMaker;
+use Config;
 
 if($^O eq 'MSWin32')
 {
@@ -83,6 +84,8 @@ WriteMakefile(
     test               => {
         TESTS => 't/*.t xt/*.t',
     },
+    CCFLAGS => "$Config{ccflags} $ENV{CFLAGS} $ENV{CPPFLAGS}",
+    LDFLAGS => "$Config{lddlflags} $ENV{LDFLAGS}",
 );
 
 
