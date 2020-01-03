@@ -598,7 +598,7 @@ your bug as I make changes.
 =head1 FOR MORE INFORMATION
 
 The project is hosted at github L<https://github.com/gwadej/perl-device-usb/>.
-More information on the project, including installation help is avaliable on the
+More information on the project, including installation help is available on the
 Wiki.
 
 =head1 LIMITATIONS
